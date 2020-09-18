@@ -1,0 +1,5 @@
++ skaffold.dev
+    1. chocolatey -> install 
+    2. choco install -y skaffold
++ ingress-nginx
+    kubectl apply -f ...yaml
