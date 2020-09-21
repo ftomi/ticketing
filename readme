@@ -3,3 +3,5 @@
     2. choco install -y skaffold
 + ingress-nginx
     kubectl apply -f ...yaml
++ add env to kucernetes
+    kubectl create secret generic jwt-secret --from-literal=JWT_KEY=asdf
