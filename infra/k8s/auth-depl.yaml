@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: auth
-          image: stephengrider/auth
+          image: ftomi/auth
           env:
             - name: JWT_KEY
               valueFrom:
