@@ -5,3 +5,34 @@
     kubectl apply -f ...yaml
 + add env to kucernetes
     kubectl create secret generic jwt-secret --from-literal=JWT_KEY=asdf
+
+
++ SSR -> get service name
+
+[1] kubectl get namespace
+[2] kubectl get services -n <NGINX NAMESPACE>
+baseURL:
+        "http://[1].[2].svc.cluster.local",
+
++ npm package creation and use
+    • npmjs.org -> register and create organization
+    • package.json -> package name and version !!!
+    • create git repo (git init; git add .; git commit -m "initial")
+    • npm publish --access public 
+        - if not logged in: npm login
+    • because of npmjs uses js files: 
+        tsc --init
+        npm install typescript del-cli --save-dev
+        // !!!  TO PACKAGE.JSON 
+            "main": "./build/index.js", // entry point
+            "types": "./build/index.d.ts", // type definition
+            "files": [
+                "build/**/*"
+            ],
+            "scripts": {
+                "clean": "del ./build/*",
+                "build": "npm run clean && tsc",
+                "pub": "git add . && git commit -m \"Updates\" && npm version patch && npm run build && npm publish" // commit to git and publish to npm
+            },
+        // !!!
+
