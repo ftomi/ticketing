@@ -1,8 +1,7 @@
-// import { request } from "express";
-import { MongoMemoryServer } from "mongodb-memory-server";
-import mongoose from "mongoose";
-import request from "supertest";
-import { app } from "../app";
+import { MongoMemoryServer } from 'mongodb-memory-server';
+import mongoose from 'mongoose';
+import request from 'supertest';
+import { app } from '../app';
 
 declare global {
   namespace NodeJS {
@@ -12,17 +11,17 @@ declare global {
   }
 }
 
-let mongod: any;
+let mongo: any;
 beforeAll(async () => {
-  process.env.JWT_KEY = "asdfasdf";
-  process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+  process.env.JWT_KEY = 'asdfasdf';
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
-  mongod = new MongoMemoryServer();
-  const mongoUri = await mongod.getUri();
+  mongo = new MongoMemoryServer();
+  const mongoUri = await mongo.getUri();
 
   await mongoose.connect(mongoUri, {
     useNewUrlParser: true,
-    useUnifiedTopology: true,
+    useUnifiedTopology: true
   });
 });
 
@@ -35,19 +34,23 @@ beforeEach(async () => {
 });
 
 afterAll(async () => {
-  await mongod.stop();
+  await mongo.stop();
   await mongoose.connection.close();
 });
 
 global.signin = async () => {
-  const email = "test@test.com";
-  const password = "password";
+  const email = 'test@test.com';
+  const password = 'password';
 
   const response = await request(app)
-    .post("/api/users/signup")
-    .send({ email, password })
+    .post('/api/users/signup')
+    .send({
+      email,
+      password
+    })
     .expect(201);
 
-  const cookie = response.get("Set-Cookie");
+  const cookie = response.get('Set-Cookie');
+
   return cookie;
 };
